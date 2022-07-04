@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Platform, StyleSheet, View, Text, TextInput, TouchableOpacity, UIManager, ActivityIndicator, Keyboard } from 'react-native';
+import { Platform, StyleSheet, View, Text, TextInput, TouchableOpacity, UIManager, ActivityIndicator, Keyboard, LayoutAnimation } from 'react-native';
 import { API, API_LOGIN } from '../constants/API';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
@@ -84,7 +84,7 @@ export default function SignInSignUpScreen({ navigation }) {
       <View>
         <View style={{ flexDirection: "row" }}>
           <TouchableOpacity style={styles.button} onPress={login}>
-            <Text style={styles.buttonText}> Log In </Text>
+
             <Text style={styles.buttonText}> {isLogIn ? "Log In" : "Sign Up"} </Text>
           </TouchableOpacity>
           {loading ? <ActivityIndicator style={{ marginLeft: 10 }} /> : <View />}
