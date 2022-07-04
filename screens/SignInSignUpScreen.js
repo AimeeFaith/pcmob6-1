@@ -95,6 +95,11 @@ export default function SignInSignUpScreen({ navigation }) {
       </Text>
       <TouchableOpacity
         onPress={() => {
+          LayoutAnimation.configureNext({
+            duration: 700,
+            create: { type: 'linear', property: 'opacity' },
+            update: { type: 'spring', springDamping: 0.3 }
+          });
           setIsLogIn(!isLogIn);
           setErrorText("");
         }}>
