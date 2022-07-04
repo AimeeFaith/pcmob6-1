@@ -45,31 +45,31 @@ export default function SignInSignUpScreen({ navigation }) {
       }
     }
 
-    async function signUp() {
-      if (password != confirmPassword) {
-        setErrorText("Your passwords don't match. Check and try again.")
-      } else {
-        try {
-          setLoading(true);
-          const response = await axios.post(API + API_SIGNUP, {
-            username,
-            password,
-          });
-          if (response.data.Error) {
-            // We have an error message for if the user already exists
-            setErrorText(response.data.Error);
-            setLoading(false);
-          } else {
-            console.log("Success signing up!");
-            setLoading(false);
-            login();
-          }
-        } catch (error) {
+  }
+  async function signUp() {
+    if (password != confirmPassword) {
+      setErrorText("Your passwords don't match. Check and try again.")
+    } else {
+      try {
+        setLoading(true);
+        const response = await axios.post(API + API_SIGNUP, {
+          username,
+          password,
+        });
+        if (response.data.Error) {
+          // We have an error message for if the user already exists
+          setErrorText(response.data.Error);
           setLoading(false);
-          console.log("Error logging in!");
-          console.log(error.response);
-          setErrorText(error.response.data.description);
+        } else {
+          console.log("Success signing up!");
+          setLoading(false);
+          login();
         }
+      } catch (error) {
+        setLoading(false);
+        console.log("Error logging in!");
+        console.log(error.response);
+        setErrorText(error.response.data.description);
       }
     }
   }
