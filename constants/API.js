@@ -1,4 +1,4 @@
-export const API = "https://replit.com/@AimeeCheng/pcmob6-1#main.py"
+export const API = "https://pcmob6-1.aimeecheng.repl.co"
 export const API_LOGIN = "/auth"
 export const API_SIGNUP = "/newuser"
 export const API_POSTS = "/posts"
