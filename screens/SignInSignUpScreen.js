@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Platform, StyleSheet, View, Text, TextInput, TouchableOpacity, UIManager, ActivityIndicator, Keyboard, LayoutAnimation } from 'react-native';
-import { API, API_LOGIN } from '../constants/API';
+import { API, API_LOGIN, API_SIGNUP } from '../constants/API';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
