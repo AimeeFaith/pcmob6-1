@@ -16,6 +16,7 @@ export default function SignInSignUpScreen({ navigation }) {
   const [loading, setLoading] = useState(false);
   const [errorText, setErrorText] = useState('');
   const [isLogIn, setIsLogIn] = useState(true);
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   async function login() {
     console.log("---- Login time ----");
