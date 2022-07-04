@@ -112,7 +112,7 @@ export default function SignInSignUpScreen({ navigation }) {
       <View />
       <View>
         <View style={{ flexDirection: "row" }}>
-          <TouchableOpacity style={styles.button} onPress={login}>
+          <TouchableOpacity style={styles.button} onPress={isLogIn ? login : signUp}>
 
             <Text style={styles.buttonText}> {isLogIn ? "Log In" : "Sign Up"} </Text>
           </TouchableOpacity>
