@@ -6,12 +6,12 @@ import { commonStyles, lightStyles } from "../styles/commonStyles";
 export default function ShowScreen({ navigation, route }) {
 
   const [post, setPost] = useState(route.params.post);
-  const styles = {...lightStyles, ...commonStyles};
+  const styles = { ...lightStyles, ...commonStyles };
 
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <TouchableOpacity onPress={editPost} style={{marginRight: 10}}>
+        <TouchableOpacity onPress={editPost} style={{ marginRight: 10 }}>
           <FontAwesome name="pencil-square-o" size={30} color={styles.headerTint} />
         </TouchableOpacity>
       ),
@@ -25,12 +25,13 @@ export default function ShowScreen({ navigation, route }) {
   function editPost() {
     navigation.navigate("Edit")
   }
-  
+
   return (
     <View style={styles.container}>
-      <Text>
-        Details Screen
-      </Text>
+      <Text style={[styles.title, styles.text]}>{post.title}</Text>
+      <Text style={[styles.content, styles.text]}>{post.content}</Text>
+      Details Screen
+
     </View>
   );
 }
