@@ -62,7 +62,19 @@ export default function IndexScreen({ navigation, route }) {
     navigation.navigate("Add")
   }
 
-  function deletePost() { }
+  async function deletePost(id) {
+    const token = await AsyncStorage.getItem("token");
+    console.log("Deleting " + id);
+    try {
+      const response = await axios.delete(API + API_POSTS + `/${id}`, {
+        headers: { Authorization: `JWT ${token}` },
+      })
+      console.log(response);
+      setPosts(posts.filter((item) => item.id !== id));
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   // The function to render each row in our FlatList
   function renderItem({ item }) {
