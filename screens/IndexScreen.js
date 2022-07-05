@@ -93,7 +93,7 @@ export default function IndexScreen({ navigation, route }) {
             justifyContent: "space-between",
           }}>
           <Text style={styles.text}>{item.title}</Text>
-          <TouchableOpacity onPress={deletePost}>
+          <TouchableOpacity onPress={() => deletePost(item.id)}>
             <FontAwesome
               name="trash"
               size={24}
