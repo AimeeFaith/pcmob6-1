@@ -68,7 +68,7 @@ export default function IndexScreen({ navigation, route }) {
   function renderItem({ item }) {
     return (
       <TouchableOpacity
-        onPress={() => navigation.navigate("Details", { id: item })}
+        onPress={() => navigation.navigate("Details", { id: item.id })}
       >
         <View
           style={{
@@ -83,7 +83,7 @@ export default function IndexScreen({ navigation, route }) {
           <Text style={styles.text}>{item.title}</Text>
           <TouchableOpacity onPress={deletePost}>
             <FontAwesome
-              name="plus"
+              name="trash"
               size={24}
               style={{ color: styles.headerTint, marginRight: 15 }}
             />

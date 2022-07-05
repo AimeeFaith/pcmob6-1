@@ -36,7 +36,7 @@ export default function ShowScreen({ navigation, route }) {
       console.log(response.data);
       setPost(response.data);
     } catch (error) {
-      console.log(error.response.data);
+      console.log(error);
       if (error.response.data.error = "Invalid token") {
         navigation.navigate("SignInSignUp");
       }
@@ -52,7 +52,6 @@ export default function ShowScreen({ navigation, route }) {
     <View style={styles.container}>
       <Text style={[styles.title, styles.text]}>{post.title}</Text>
       <Text style={[styles.content, styles.text]}>{post.content}</Text>
-      Details Screen
 
     </View>
   );
