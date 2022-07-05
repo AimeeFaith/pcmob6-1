@@ -58,7 +58,9 @@ export default function IndexScreen({ navigation, route }) {
 
   }
 
-  function addPost() { }
+  function addPost() {
+    navigation.navigate("Add")
+  }
 
   function deletePost() { }
 
