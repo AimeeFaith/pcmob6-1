@@ -86,7 +86,7 @@ export default function IndexScreen({ navigation, route }) {
               name="plus"
               size={24}
               style={{ color: styles.headerTint, marginRight: 15 }}
-            />IndexScreen
+            />
           </TouchableOpacity>
         </View>
       </TouchableOpacity>
