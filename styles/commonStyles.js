@@ -7,13 +7,13 @@ export const commonStyles = {
   },
   buttonText: {
     fontWeight: '400',
-    fontSize: 20, 
+    fontSize: 20,
     margin: 10,
     color: 'white',
   },
   title: {
     fontWeight: "bold",
-    fontSize: 30, 
+    fontSize: 30,
     textAlign: 'center',
   },
   content: {
@@ -25,7 +25,7 @@ export const commonStyles = {
 export const lightStyles = {
   container: {
     flex: 1,
-    backgroundColor: "#ffc",
+    backgroundColor: "cce5ff",
   },
   text: {
     color: "black",
