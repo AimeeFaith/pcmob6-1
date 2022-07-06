@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Text, View, TouchableOpacity } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { commonStyles, lightStyles } from "../styles/commonStyles";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { API, API_POSTS } from "../constants/API";
+import { useSelector } from "react-redux";
 
 export default function ShowScreen({ navigation, route }) {
+  const token = useSelector((state) => state.auth.token);
   const [post, setPost] = useState({ title: "", content: "" });
   const styles = { ...lightStyles, ...commonStyles };
 
@@ -14,8 +15,11 @@ export default function ShowScreen({ navigation, route }) {
     navigation.setOptions({
       headerRight: () => (
         <TouchableOpacity onPress={editPost} style={{ marginRight: 10 }}>
-          <FontAwesome name="pencil-square-o" size={30} color={styles.headerTint} />
-
+          <FontAwesome
+            name="pencil-square-o"
+            size={30}
+            color={styles.headerTint}
+          />
         </TouchableOpacity>
       ),
     });
@@ -23,36 +27,33 @@ export default function ShowScreen({ navigation, route }) {
 
   useEffect(() => {
     getPost();
-  }, [])
+  }, []);
 
   async function getPost() {
-    const token = await AsyncStorage.getItem("token");
-    const id = route.params.id
-    console.log(id)
+    const id = route.params.id;
+    console.log(id);
     try {
       const response = await axios.get(API + API_POSTS + "/" + id, {
         headers: { Authorization: `JWT ${token}` },
-      })
+      });
       console.log(response.data);
       setPost(response.data);
     } catch (error) {
-      console.log(error);
-      if (error.response.data.error = "Invalid token") {
+      console.log(error.response.data);
+      if ((error.response.data.error = "Invalid token")) {
         navigation.navigate("SignInSignUp");
       }
     }
   }
 
-
   function editPost() {
-    navigation.navigate("Edit", { post: post })
+    navigation.navigate("Edit");
   }
 
   return (
     <View style={styles.container}>
       <Text style={[styles.title, styles.text]}>{post.title}</Text>
       <Text style={[styles.content, styles.text]}>{post.content}</Text>
-
     </View>
   );
 }

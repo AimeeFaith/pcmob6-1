@@ -1,13 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { Text, View, TouchableOpacity, FlatList, RefreshControl, } from "react-native";
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  FlatList,
+  RefreshControl,
+} from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import axios from "axios";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { API, API_POSTS } from "../constants/API";
 import { lightStyles } from "../styles/commonStyles";
+import { useSelector } from "react-redux";
 
 export default function IndexScreen({ navigation, route }) {
-
+  const token = useSelector((state) => state.auth.token);
+  console.log("Token: " + token);
   const [posts, setPosts] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
   const styles = lightStyles;
@@ -17,7 +24,11 @@ export default function IndexScreen({ navigation, route }) {
     navigation.setOptions({
       headerRight: () => (
         <TouchableOpacity onPress={addPost}>
-          <FontAwesome name="plus" size={24} style={{ color: styles.headerTint, marginRight: 15 }} />
+          <FontAwesome
+            name="plus"
+            size={24}
+            style={{ color: styles.headerTint, marginRight: 15 }}
+          />
         </TouchableOpacity>
       ),
     });
@@ -35,7 +46,6 @@ export default function IndexScreen({ navigation, route }) {
   }, []);
 
   async function getPosts() {
-    const token = await AsyncStorage.getItem("token");
     try {
       const response = await axios.get(API + API_POSTS, {
         headers: { Authorization: `JWT ${token}` },
@@ -44,8 +54,8 @@ export default function IndexScreen({ navigation, route }) {
       setPosts(response.data);
       return "completed";
     } catch (error) {
-      console.log(error.response.data);
-      if ((error.response.data.error = "Invalid token")) {
+      console.log("error.response:" + error.response.data);
+      if (error.response.data.error == "Invalid token") {
         navigation.navigate("SignInSignUp");
       }
     }
@@ -55,24 +65,22 @@ export default function IndexScreen({ navigation, route }) {
     setRefreshing(true);
     const response = await getPosts();
     setRefreshing(false);
-
   }
 
   function addPost() {
-    navigation.navigate("Add")
+    navigation.navigate("Add");
   }
 
   async function deletePost(id) {
-    const token = await AsyncStorage.getItem("token");
     console.log("Deleting " + id);
     try {
       const response = await axios.delete(API + API_POSTS + `/${id}`, {
         headers: { Authorization: `JWT ${token}` },
-      })
+      });
       console.log(response);
       setPosts(posts.filter((item) => item.id !== id));
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
 
@@ -91,14 +99,11 @@ export default function IndexScreen({ navigation, route }) {
             borderBottomWidth: 1,
             flexDirection: "row",
             justifyContent: "space-between",
-          }}>
+          }}
+        >
           <Text style={styles.text}>{item.title}</Text>
           <TouchableOpacity onPress={() => deletePost(item.id)}>
-            <FontAwesome
-              name="trash"
-              size={24}
-              style={{ color: styles.headerTint, marginRight: 15 }}
-            />
+            <FontAwesome name="trash" size={20} color="#a80000" />
           </TouchableOpacity>
         </View>
       </TouchableOpacity>
@@ -123,4 +128,3 @@ export default function IndexScreen({ navigation, route }) {
     </View>
   );
 }
-
