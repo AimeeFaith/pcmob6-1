@@ -5,10 +5,12 @@ import { createStackNavigator } from "@react-navigation/stack";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import SignInSignUpScreen from "./screens/SignInSignUpScreen";
 import LoggedInStack from "./components/LoggedInTabStack"
+import { useSelector } from "react-redux";
 
 const Stack = createStackNavigator();
 
-export default function App() {
+function App() {
+  const token = useSelector((state) => state.auth.token);
   const [loading, setLoading] = useState(true);
   const [signedIn, setSignedIn] = useState(false);
 
