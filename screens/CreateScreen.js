@@ -1,59 +1,80 @@
-import React, { useState, useEffect } from "react";
-import { Text, View, TouchableOpacity } from "react-native";
-import { FontAwesome } from "@expo/vector-icons";
-import { commonStyles, lightStyles } from "../styles/commonStyles";
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+} from "react-native";
+import { lightStyles, commonStyles, darkStyles } from "../styles/commonStyles";
 import axios from "axios";
-import { API, API_POSTS } from "../constants/API";
+import { API, API_CREATE } from "../constants/API";
 import { useSelector } from "react-redux";
 
-export default function ShowScreen({ navigation, route }) {
+export default function CreateScreen({ navigation }) {
   const token = useSelector((state) => state.auth.token);
-  const [post, setPost] = useState({ title: "", content: "" });
-  const styles = { ...lightStyles, ...commonStyles };
+  const isDark = useSelector((state) => state.accountPrefs.isDark);
+  const styles = { ...commonStyles, ...(isDark ? darkStyles : lightStyles) };
 
-  useEffect(() => {
-    navigation.setOptions({
-      headerRight: () => (
-        <TouchableOpacity onPress={editPost} style={{ marginRight: 10 }}>
-          <FontAwesome
-            name="pencil-square-o"
-            size={30}
-            color={styles.headerTint}
-          />
-        </TouchableOpacity>
-      ),
-    });
-  });
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  // delete the savePost before you copy paste
+  async function savePost() {
+    const post = {
+      title: title,
+      content: content,
+    };
 
-  useEffect(() => {
-    getPost();
-  }, []);
-
-  async function getPost() {
-    const id = route.params.id;
-    console.log(id);
     try {
-      const response = await axios.get(API + API_POSTS + "/" + id, {
+      console.log(token);
+      const response = await axios.post(API + API_CREATE, post, {
         headers: { Authorization: `JWT ${token}` },
       });
       console.log(response.data);
-      setPost(response.data);
+      navigation.navigate("Index", { post: post });
     } catch (error) {
-      console.log(error.response.data);
-      if ((error.response.data.error = "Invalid token")) {
-        navigation.navigate("SignInSignUp");
-      }
+      console.log(error);
     }
-  }
-
-  function editPost() {
-    navigation.navigate("Edit");
   }
 
   return (
     <View style={styles.container}>
-      <Text style={[styles.title, styles.text]}>{post.title}</Text>
-      <Text style={[styles.content, styles.text]}>{post.content}</Text>
+      <View style={{ margin: 20 }}>
+        <Text style={[additionalStyles.label, styles.text]}>Enter Title:</Text>
+        <TextInput
+          style={additionalStyles.input}
+          value={title}
+          onChangeText={(text) => setTitle(text)}
+        />
+        <Text style={[additionalStyles.label, styles.text]}>
+          Enter Content:
+        </Text>
+        <TextInput
+          style={additionalStyles.input}
+          value={content}
+          onChangeText={(text) => setContent(text)}
+        />
+        <TouchableOpacity
+          style={[styles.button, { marginTop: 20 }]}
+          onPress={savePost}
+        >
+          <Text style={styles.buttonText}>Save</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
+
+const additionalStyles = StyleSheet.create({
+  input: {
+    fontSize: 24,
+    borderWidth: 1,
+    borderColor: "black",
+    marginBottom: 15,
+  },
+  label: {
+    fontSize: 28,
+    marginBottom: 10,
+    marginLeft: 5,
+  },
+});
