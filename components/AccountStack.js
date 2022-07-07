@@ -1,38 +1,40 @@
 import React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
-import AccountScreen from "../screens/AccountScreen";
-import CameraScreen from "../screens/CameraScreen";
-import { lightStyles, darkStyles } from "../styles/commonStyles";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import BlogStack from "../components/BlogStack";
+import AccountStack from "../components/AccountStack";
+import { FontAwesome } from "@expo/vector-icons";
 import { useSelector } from "react-redux";
 
-const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
 
-export default function AccountStack() {
+export default function LoggedInStack() {
   const isDark = useSelector((state) => state.accountPrefs.isDark);
-  const styles = isDark ? darkStyles : lightStyles;
-
   return (
-    <Stack.Navigator>
-      <Stack.Screen
-        component={AccountScreen}
-        name="Account"
-        options={{
-          title: "Your Account",
-          headerStyle: styles.header,
-          headerTitleStyle: styles.headerTitle,
-          headerLeft: null,
-        }}
-      />
-      <Stack.Screen
-        component={CameraScreen}
-        name="Camera"
-        options={{
-          title: "Take a photo",
-          headerStyle: styles.header,
-          headerTitleStyle: styles.headerTitle,
-          headerTintColor: styles.headerTint,
-        }}
-      />
-    </Stack.Navigator>
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ color, size }) => {
+          let iconName;
+
+          if (route.name === "Blog") {
+            iconName = "comments";
+          } else if (route.name === "Settings") {
+            iconName = "cog";
+          }
+          // You can return any component that you like here!
+          return <FontAwesome name={iconName} size={size} color={color} />;
+        },
+      })}
+      tabBarOptions={{
+        activeTintColor: "tomato",
+        inactiveTintColor: "gray",
+        tabStyle: {
+          backgroundColor: isDark ? "#181818" : "white",
+        },
+      }}
+    >
+      <Tab.Screen name="Blog" component={BlogStack} />
+      <Tab.Screen name="Settings" component={AccountStack} />
+    </Tab.Navigator>
   );
 }
+
