@@ -1,57 +1,43 @@
-import React, { useState, useEffect } from "react";
-import { ActivityIndicator, StyleSheet, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import SignInSignUpScreen from "./screens/SignInSignUpScreen";
-import LoggedInStack from "./components/LoggedInTabStack"
+import React from "react";
+import { StyleSheet } from "react-native";
 import { Provider, useSelector } from "react-redux";
+import LoggedInTabStack from "./components/LoggedInTabStack";
 import store from "./redux/configureStore";
+import SignInSignUpScreen from "./screens/SignInSignUpScreen";
+import { StatusBar } from "expo-status-bar";
 
 const Stack = createStackNavigator();
 
 function App() {
   const token = useSelector((state) => state.auth.token);
-  const [loading, setLoading] = useState(true);
-  const [signedIn, setSignedIn] = useState(false);
-
-  async function loadToken() {
-    if (token) {
-      setSignedIn(true);
-    }
-    setLoading(false);
-  }
-
-  useEffect(() => {
-    loadToken();
-  }, []);
-
-  return loading ? (
-    <View style={styles.container}>
-      <ActivityIndicator />
-    </View>
-  ) : (
+  const isDark = useSelector((state) => state.accountPrefs.isDark);
+  console.log(token);
+  return (
     <NavigationContainer>
+      <StatusBar style={isDark ? "light" : "dark"} />
       <Stack.Navigator
-
-        headerMode="none"
-        //initialRoutename={signedIn?"Logged In":"SignInSignUp"}
-        initialRouteName={token ? "Logged In" : "SignInSignUp"}
-        screenOptions={{ animationEnabled: false, }}
+        initialRouteName={token != null ? "Logged In" : "SignInSignUp"}
+        animationEnabled={false}
+        screenOptions={{
+          headerShown: false,
+          headerMode: "none",
+        }}
       >
         <Stack.Screen component={SignInSignUpScreen} name="SignInSignUp" />
-        <Stack.Screen component={LoggedInStack} name="Logged In" />
+        <Stack.Screen component={LoggedInTabStack} name="Logged In" />
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
 
-export default function AddWrapper() {
+export default function AppWrapper() {
   return (
     <Provider store={store}>
       <App />
     </Provider>
-  )
+  );
 }
 
 const styles = StyleSheet.create({

@@ -3,7 +3,8 @@ export const commonStyles = {
     backgroundColor: '#2069e0',
     borderRadius: 15,
     width: "50%",
-    alignItems: "center"
+    alignItems: "center",
+    marginTop: 40,
   },
   buttonText: {
     fontWeight: '400',
@@ -25,7 +26,7 @@ export const commonStyles = {
 export const lightStyles = {
   container: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: "#ffc",
   },
   text: {
     color: "black",
@@ -48,7 +49,7 @@ export const lightStyles = {
 export const darkStyles = {
   container: {
     flex: 1,
-    backgroundColor: "grey",
+    backgroundColor: "#878683",
   },
   text: {
     color: "white",
