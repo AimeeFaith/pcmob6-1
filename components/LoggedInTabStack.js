@@ -4,6 +4,7 @@ import BlogStack from '../components/BlogStack';
 import AccountStack from '../components/AccountStack';
 import { FontAwesome } from '@expo/vector-icons';
 import { useSelector } from "react-redux";
+import InfoScreen from '../screens/InfoScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -26,6 +27,10 @@ export default function LoggedInStack() {
                     } else if (route.name === "Profile") {
                         iconName = "user";
                     }
+                    else {
+                        iconName = "info";
+                    }
+
                     // You can return any component that you like here!
                     return <FontAwesome name={iconName} size={size} color={color} />;
                 },
@@ -33,6 +38,7 @@ export default function LoggedInStack() {
         >
             <Tab.Screen name="Profile" component={AccountStack} />
             <Tab.Screen name="Booking" component={BlogStack} />
+            <Tab.Screen name="Info" component={InfoScreen} />
         </Tab.Navigator>
     );
 }
