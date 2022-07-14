@@ -11,7 +11,7 @@ export default function LoggedInStack() {
     const isDark = useSelector((state) => state.accountPrefs.isDark);
     return (
         <Tab.Navigator
-            initialRouteName="Settings"
+            initialRouteName="Profile"
             screenOptions={({ route }) => ({
                 tabBarActiveTintColor: "tomato",
                 tabBarInactiveTintColor: "gray",
@@ -21,18 +21,18 @@ export default function LoggedInStack() {
                 tabBarIcon: ({ color, size }) => {
                     let iconName;
 
-                    if (route.name === "Blog") {
-                        iconName = "comments";
-                    } else if (route.name === "Settings") {
-                        iconName = "cog";
+                    if (route.name === "Booking") {
+                        iconName = "calendar";
+                    } else if (route.name === "Profile") {
+                        iconName = "user";
                     }
                     // You can return any component that you like here!
                     return <FontAwesome name={iconName} size={size} color={color} />;
                 },
             })}
         >
-            <Tab.Screen name="Blog" component={BlogStack} />
-            <Tab.Screen name="Settings" component={AccountStack} />
+            <Tab.Screen name="Profile" component={AccountStack} />
+            <Tab.Screen name="Booking" component={BlogStack} />
         </Tab.Navigator>
     );
 }
