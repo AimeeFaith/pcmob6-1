@@ -6,6 +6,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { useSelector } from "react-redux";
 import InfoScreen from '../screens/InfoScreen';
 import CreateScreen from '../screens/CreateScreen';
+import BlogCreateStack from './BlogCreateStack';
 
 const Tab = createBottomTabNavigator();
 
@@ -38,8 +39,9 @@ export default function LoggedInStack() {
             })}
         >
             <Tab.Screen name="Profile" component={AccountStack} />
-            <Tab.Screen name="Booking" component={CreateScreen} />
+            <Tab.Screen name="Booking" component={BlogCreateStack} />
             <Tab.Screen name="Info" component={BlogStack} />
         </Tab.Navigator>
     );
 }
+

@@ -110,7 +110,10 @@ export default function AccountScreen({ navigation }) {
       <Text style={[styles.title, styles.text, { marginTop: 30 }]}>
         {" "}
         Welcome {username} !
-        WhatsUp today?
+      </Text>
+      <Text style={[styles.title, styles.text, { marginTop: 30 }]}>
+        {" "}
+        Whatsup for Today?
       </Text>
       <View
         style={{

@@ -26,6 +26,7 @@ export default function CreateScreen({ navigation }) {
       headerRight: () => <Image style={{ width: 60, height: 60, borderRadius: 100, marginRight: 10 }} source={require('../assets/image/logo.jpg')} />,
 
     });
+
   });
 
   async function savePost() {
