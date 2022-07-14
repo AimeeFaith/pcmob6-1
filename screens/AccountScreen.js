@@ -25,7 +25,7 @@ export default function AccountScreen({ navigation }) {
   const isDark = useSelector((state) => state.accountPrefs.isDark);
   const dispatch = useDispatch();
   const styles = { ...commonStyles, ...(isDark ? darkStyles : lightStyles) };
-  const picSize = new Animated.Value(180);
+  const picSize = new Animated.Value(130);
   useEffect(() => {
     navigation.setOptions({
       headerLeft: () => <Image style={{ width: 60, height: 60, borderRadius: 100, marginRight: 10 }} source={require('../assets/image/logo.jpg')} />,
@@ -100,7 +100,7 @@ export default function AccountScreen({ navigation }) {
 
       <TouchableWithoutFeedback onPress={changePicSize}>
         <Animated.Image
-          source={{ uri: profilePicture }}
+          source={{ uri: profilePicture ?? 'https://raw.githubusercontent.com/AimeeFaith/pcmob6-1/2e140dadda49af8fe7b47aa4c20f2dd1ded60326/assets/image/logo.jpg' }}
           style={{ width: picSize, height: picSize, borderRadius: 200 }}
         />
       </TouchableWithoutFeedback>
