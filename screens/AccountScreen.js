@@ -26,6 +26,12 @@ export default function AccountScreen({ navigation }) {
   const dispatch = useDispatch();
   const styles = { ...commonStyles, ...(isDark ? darkStyles : lightStyles) };
   const picSize = new Animated.Value(180);
+  useEffect(() => {
+    navigation.setOptions({
+      headerLeft: () => <Image style={{ width: 60, height: 60, borderRadius: 100, marginRight: 10 }} source={require('../assets/image/logo.jpg')} />,
+
+    });
+  });
 
   function changePicSize() {
     Animated.loop(
@@ -91,11 +97,7 @@ export default function AccountScreen({ navigation }) {
 
   return (
     <View style={[styles.container, { alignItems: "center" }]}>
-      <Text style={[styles.title, styles.text, { marginTop: 30 }]}>
-        {" "}
-        Welcome {username} !
-        WhatsUp today?
-      </Text>
+
       <TouchableWithoutFeedback onPress={changePicSize}>
         <Animated.Image
           source={{ uri: profilePicture }}
@@ -105,6 +107,11 @@ export default function AccountScreen({ navigation }) {
       <TouchableOpacity onPress={() => navigation.navigate("Camera")}>
         <FontAwesome name="camera" size={50} style={{ color: "black", margin: 10 }} />
       </TouchableOpacity>
+      <Text style={[styles.title, styles.text, { marginTop: 30 }]}>
+        {" "}
+        Welcome {username} !
+        WhatsUp today?
+      </Text>
       <View
         style={{
           flexDirection: "row",

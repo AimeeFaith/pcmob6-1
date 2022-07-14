@@ -26,7 +26,7 @@ export const commonStyles = {
 export const lightStyles = {
   container: {
     flex: 1,
-    backgroundColor: "d3d3d2",
+    backgroundColor: "#BDBDBE",
   },
   text: {
     color: "black",
@@ -49,7 +49,7 @@ export const lightStyles = {
 export const darkStyles = {
   container: {
     flex: 1,
-    backgroundColor: "#878683",
+    backgroundColor: "#BDBDBE",
   },
   text: {
     color: "white",

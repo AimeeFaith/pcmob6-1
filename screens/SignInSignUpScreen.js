@@ -59,6 +59,7 @@ export default function SignInSignUpScreen({ navigation }) {
         } else {
           console.log("Success signing up!");
           setLoading(false);
+          dispatch({ ...logInAction(), payload: response.data.access_token });
           login();
         }
       } catch (error) {
