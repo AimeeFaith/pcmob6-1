@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  Image,
+
 } from "react-native";
 import axios from "axios";
 import { API, API_CREATE } from "../constants/API";
@@ -19,6 +21,12 @@ export default function CreateScreen({ navigation }) {
   const [appt_datetime, setAppt_datetime] = useState("");
   const [customer, setCustomer] = useState("");
   const [stylist, setStylist] = useState("");
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => <Image style={{ width: 60, height: 60, borderRadius: 100, marginRight: 10 }} source={require('../assets/image/logo.jpg')} />,
+
+    });
+  });
 
   async function savePost() {
     const post = {

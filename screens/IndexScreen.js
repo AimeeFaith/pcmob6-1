@@ -92,7 +92,7 @@ export default function IndexScreen({ navigation, route }) {
             flexDirection: "row",
             justifyContent: "space-between",
           }}>
-          <Text style={styles.text}>{item.service}</Text>
+          <Text style={styles.text}>{item.appt_datetime}</Text>
           <TouchableOpacity onPress={() => deletePost(item.id)}>
             <FontAwesome name="trash" size={26} color="#a80000" />
           </TouchableOpacity>
