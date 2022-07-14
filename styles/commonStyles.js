@@ -14,25 +14,25 @@ export const commonStyles = {
   },
   title: {
     fontWeight: "bold",
-    fontSize: 30,
-    textAlign: 'center',
+    fontSize: 18,
+    textAlign: 'left',
   },
   content: {
     fontWeight: '400',
-    fontSize: 24,
+    fontSize: 16,
   },
 }
 
 export const lightStyles = {
   container: {
     flex: 1,
-    backgroundColor: "#ffc",
+    backgroundColor: "d3d3d2",
   },
   text: {
     color: "black",
   },
   header: {
-    backgroundColor: "yellow",
+    backgroundColor: "transparent",
     height: 100,
     shadowColor: "black",
     shadowOpacity: 0.2,

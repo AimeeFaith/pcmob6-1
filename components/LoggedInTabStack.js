@@ -11,6 +11,7 @@ export default function LoggedInStack() {
     const isDark = useSelector((state) => state.accountPrefs.isDark);
     return (
         <Tab.Navigator
+            initialRouteName="Settings"
             screenOptions={({ route }) => ({
                 tabBarActiveTintColor: "tomato",
                 tabBarInactiveTintColor: "gray",

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Text, View, TouchableOpacity, FlatList, RefreshControl } from "react-native";
+import { Text, View, TouchableOpacity, FlatList, RefreshControl, Image } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import axios from "axios";
 import { API, API_POSTS } from "../constants/API";
@@ -15,11 +15,12 @@ export default function IndexScreen({ navigation, route }) {
 
   useEffect(() => {
     navigation.setOptions({
+      headerLeft: () => <Image style={{ width: 60, height: 60, borderRadius: 100 }} source={require('../assets/image/logo.jpg')} />,
       headerRight: () => (
         <TouchableOpacity onPress={addPost}>
           <FontAwesome name="plus" size={24} style={{ color: styles.headerTint, marginRight: 15 }} />
         </TouchableOpacity>
-      ),
+      )
     });
   });
 
@@ -91,7 +92,7 @@ export default function IndexScreen({ navigation, route }) {
             flexDirection: "row",
             justifyContent: "space-between",
           }}>
-          <Text style={styles.text}>{item.title}</Text>
+          <Text style={styles.text}>{item.service}</Text>
           <TouchableOpacity onPress={() => deletePost(item.id)}>
             <FontAwesome name="trash" size={26} color="#a80000" />
           </TouchableOpacity>

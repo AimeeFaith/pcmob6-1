@@ -15,13 +15,17 @@ export default function CreateScreen({ navigation }) {
   const token = useSelector((state) => state.auth.token);
   const isDark = useSelector((state) => state.accountPrefs.isDark);
   const styles = { ...commonStyles, ...(isDark ? darkStyles : lightStyles) };
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  const [service, setService] = useState("");
+  const [appt_datetime, setAppt_datetime] = useState("");
+  const [customer, setCustomer] = useState("");
+  const [stylist, setStylist] = useState("");
 
   async function savePost() {
     const post = {
-      title: title,
-      content: content,
+      service: service,
+      appt_datetime: appt_datetime,
+      customer: customer,
+      stylist: stylist,
     };
     try {
       console.log(token);
@@ -38,19 +42,31 @@ export default function CreateScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={{ margin: 20 }}>
-        <Text style={[additionalStyles.label, styles.text]}>Enter Title:</Text>
+        <Text style={[additionalStyles.label, styles.text]}>Service:</Text>
         <TextInput
           style={additionalStyles.input}
-          value={title}
-          onChangeText={(text) => setTitle(text)}
+          value={service}
+          onChangeText={(text) => setService(text)}
         />
         <Text style={[additionalStyles.label, styles.text]}>
-          Enter Content:
+          Date and Time:
         </Text>
         <TextInput
           style={additionalStyles.input}
-          value={content}
-          onChangeText={(text) => setContent(text)}
+          value={appt_datetime}
+          onChangeText={(text) => setAppt_datetime(text)}
+        />
+        <Text style={[additionalStyles.label, styles.text]}>Client:</Text>
+        <TextInput
+          style={additionalStyles.input}
+          value={customer}
+          onChangeText={(text) => setCustomer(text)}
+        />
+        <Text style={[additionalStyles.label, styles.text]}>Stylist:</Text>
+        <TextInput
+          style={additionalStyles.input}
+          value={stylist}
+          onChangeText={(text) => setStylist(text)}
         />
         <TouchableOpacity
           style={[styles.button, { marginTop: 20 }]}
@@ -71,7 +87,7 @@ const additionalStyles = StyleSheet.create({
     marginBottom: 15,
   },
   label: {
-    fontSize: 28,
+    fontSize: 23,
     marginBottom: 10,
     marginLeft: 5,
   },

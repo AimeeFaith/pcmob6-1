@@ -15,6 +15,7 @@ import { changeModeAction } from "../redux/ducks/accountPref";
 import { commonStyles, darkStyles, lightStyles } from "../styles/commonStyles";
 import { logOutAction } from "../redux/ducks/blogAuth";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+import { FontAwesome } from "@expo/vector-icons";
 
 
 export default function AccountScreen({ navigation }) {
@@ -24,7 +25,7 @@ export default function AccountScreen({ navigation }) {
   const isDark = useSelector((state) => state.accountPrefs.isDark);
   const dispatch = useDispatch();
   const styles = { ...commonStyles, ...(isDark ? darkStyles : lightStyles) };
-  const picSize = new Animated.Value(200);
+  const picSize = new Animated.Value(180);
 
   function changePicSize() {
     Animated.loop(
@@ -92,7 +93,8 @@ export default function AccountScreen({ navigation }) {
     <View style={[styles.container, { alignItems: "center" }]}>
       <Text style={[styles.title, styles.text, { marginTop: 30 }]}>
         {" "}
-        Hello {username} !
+        Welcome {username} !
+        WhatsUp today?
       </Text>
       <TouchableWithoutFeedback onPress={changePicSize}>
         <Animated.Image
@@ -101,10 +103,7 @@ export default function AccountScreen({ navigation }) {
         />
       </TouchableWithoutFeedback>
       <TouchableOpacity onPress={() => navigation.navigate("Camera")}>
-        <Text style={{ marginTop: 10, fontSize: 20, color: "#0000EE" }}>
-          {" "}
-          No profile picture. Click to take one.{" "}
-        </Text>
+        <FontAwesome name="camera" size={50} style={{ color: "black", margin: 10 }} />
       </TouchableOpacity>
       <View
         style={{

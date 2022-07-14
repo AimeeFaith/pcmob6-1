@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, TextInput, TouchableOpacity, UIManager, LayoutAnimation, ActivityIndicator, Keyboard } from 'react-native';
+import { StyleSheet, View, Text, TextInput, TouchableOpacity, UIManager, LayoutAnimation, ActivityIndicator, Keyboard, Image } from 'react-native';
 import { API, API_LOGIN, API_SIGNUP } from '../constants/API';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
@@ -71,6 +71,8 @@ export default function SignInSignUpScreen({ navigation }) {
   }
   return (
     <View style={styles.container}>
+      <Image style={styles.tinyLogo} source={require('../assets/image/logo.jpg')} />
+
       <Text style={styles.title}>
         {isLogIn ? "Log In" : "Sign Up"}
       </Text>
@@ -144,7 +146,7 @@ export default function SignInSignUpScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'lavender',
+    backgroundColor: '#BDBDBE',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -160,7 +162,7 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
   },
   inputView: {
-    backgroundColor: "#FFC0CB",
+    backgroundColor: "#979292",
     borderRadius: 30,
     width: "70%",
     height: 45,
@@ -171,6 +173,10 @@ const styles = StyleSheet.create({
     height: 50,
     flex: 1,
     padding: 10,
+    fontSize: 20,
+    width: 200,
+    textAlign: "center",
+
   },
   button: {
     backgroundColor: '#6495ed',
@@ -186,5 +192,10 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: 'red',
     marginTop: 20
-  }
+  },
+  tinyLogo: {
+    width: 180,
+    height: 180,
+    borderRadius: 100
+  },
 });

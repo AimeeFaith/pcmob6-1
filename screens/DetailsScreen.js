@@ -50,8 +50,10 @@ export default function ShowScreen({ navigation, route }) {
 
   return (
     <View style={styles.container}>
-      <Text style={[styles.title, styles.text, { margin: 40 }]}>{post.title}</Text>
-      <Text style={[styles.content, styles.text, { margin: 20 }]}>{post.content}</Text>
+      <Text style={[styles.title, styles.text, { margin: 5 }]}>Service(s): {post.service}</Text>
+      <Text style={[styles.content, styles.text, { margin: 5 }]}>Appointment: {post.appt_datetime}</Text>
+      <Text style={[styles.title, styles.text, { margin: 5 }]}>Client: {post.customer}</Text>
+      <Text style={[styles.content, styles.text, { margin: 5 }]}>Stylist: {post.stylist}</Text>
     </View>
   );
 }
