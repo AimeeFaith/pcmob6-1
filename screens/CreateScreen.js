@@ -42,7 +42,8 @@ export default function CreateScreen({ navigation }) {
         headers: { Authorization: `JWT ${token}` },
       });
       console.log(response.data);
-      navigation.navigate("Index", { post: post });
+      // navigation.navigate("Index", { post: post });
+      navigation.navigate("Info", { screen: 'Index', post: post });
     } catch (error) {
       console.log(error);
     }
